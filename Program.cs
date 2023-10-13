@@ -1,30 +1,60 @@
-﻿using System.Text.RegularExpressions;
+﻿//https://github.com/Chernov503/MathLogic_1.2
+
+//Конъюнкция (логическое И) = *
+//Дизъюнкция (Логическое ИЛИ) = ||
+//Импликация a и b = !a || b
+//Отрицание импликации(запрет) для a и b = a && !b
+//Эквивалентность = ==
+//Сумма по модулю = ^
+//Штрих шеффира a и b = !(a * b)
+//Стрелка пирса для a и b = !a || !b
+//Отрицание a = !a
 
 namespace ConsoleApp1
 {
+
     internal class Program
     {
         static void Main()
         {
-            string input = "(A^(A / A * B) + (A+(A-A)))";
-            Console.WriteLine($"Лабораторная 1. 3 Вариант (Задание 1,2)\n\n" +
+            string input = "!(A * B) || C * !B";
+            Console.WriteLine($"Лабораторная 1. 3 Вариант (Задание 1)\n\n" +
                 $"Соблюдайте заданный формат входных данных \n" +
-                $"(Всю формулу необходимо заключить в скобки)\n" +
-                $"Допустимые переменные: ABCD (возможно изменить в коде)\n" +
-                $"Дпустимые символы */-><=+%&^#@! (возможно изменить в коде)\n" +
-                $"Пример: {input}\n");
+                $"Конъюнкция(логическое И) = *\r\n" +
+                $"Дизъюнкция(Логическое ИЛИ) = ||\r\n" +
+                $"Импликация a и b = !a || b\r\n" +
+                $"Отрицание импликации(запрет) для a и b = a * !b\r\n" +
+                $"Эквивалентность = ==\r\n" +
+                $"Сумма по модулю = ^\r\n" +
+                $"Штрих шеффира a и b = !(a * b)\r\n" +
+                $"Стрелка пирса для a и b = !a || !b\r\n" +
+                $"Отрицание a = !a\n\n" +
+                $"Допустимые переменные: ABCD(возможно изменить в коде)\n" +
+                $"Пример: {input} (Возможно изменить в коде)\n");
 
-            var formula = new Formula(input);
-            Console.WriteLine($"Предполагаемая формула {input}\n");
-            bool b = formula.IsFormula();
-            Console.WriteLine($"Формула {b}");
 
 
-            input = Console.ReadLine();
-            formula = new Formula(input);
-            Console.WriteLine($"Предполагаемая формула {input}\n");
-            b = formula.IsFormula();
-            Console.WriteLine($"Формула {b}");
+            var a = new Formula2(input);
+
+            var s_ = "A/B*C-D+E/F/(G+H)";
+            Console.WriteLine($"\n\nЛабораторная 1. 3 Вариант (Задание 2)\n\n" +
+            $"Соблюдайте заданный формат входных данных \n" +
+            $"Допустимые переменные: ABCD(возможно изменить в коде)\n" +
+            $"Допустимые знаки: */-+(возможно изменить в коде)\n" +
+            $"Пример: {s_} (Возможно изменить в коде)\n");
+
+            var s = a.ConvertInfixToPrefix(s_);
+            Console.WriteLine($"Префиксная форма: {s}");
+
+            Console.WriteLine($"\n\nЛабораторная 1. 3 Вариант (Задание 3)\n\n " +
+                $"Допустимы все знаки и все буквы\n" +
+                $"Введите формулу\n");
+            var F = Console.ReadLine().Replace(" ","");
+            Console.WriteLine("Введите подформулу");
+            var PodF = Console.ReadLine().Replace(" ", "");
+            var result = F.Contains(PodF) ? "Да, является подформулой" : "Нет, не является подформулой";
+            Console.WriteLine(result);
+
 
 
         }

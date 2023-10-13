@@ -4,11 +4,12 @@ namespace ConsoleApp1
 {
     public class Formula
     {
+
         public string formula { get; set; }
         //Любой набор переменных
-        readonly string alphabit = "ABCDI";
+        public readonly string alphabit = "ABCDI";
         //любой набор нужных условных математических знаков
-        readonly string z = "*/-><=+%&^#@!";
+        public readonly string z = "+-=!";
         public Formula(string s)
         {
             formula = s.Replace(" ", "");
@@ -27,14 +28,14 @@ namespace ConsoleApp1
                 return false;
             }
             //основная проверка
-            for(int i = 1; i < s.Length - 1; i++)
+            for (int i = 1; i < s.Length - 1; i++)
             {
                 try
                 {
                     //если символ - буква и до/после нее стоит буква
                     if (alphabit.Contains(s[i]))
                     {
-                        if (alphabit.Contains(s[i-1]) || alphabit.Contains(s[i+1]))
+                        if (alphabit.Contains(s[i - 1]) || alphabit.Contains(s[i + 1]))
                         {
                             Console.WriteLine("Между двумя элементами нет знака");
                             return false;
@@ -43,7 +44,7 @@ namespace ConsoleApp1
                     //если символ - знак и до/после него нет буквы
                     if (z.Contains(s[i]))
                     {
-                        if (!alphabit.Contains(s[i-1]) || !alphabit.Contains(s[i+1]))
+                        if (!alphabit.Contains(s[i - 1]) || !alphabit.Contains(s[i + 1]))
                         {
                             Console.WriteLine("Два знака стоят друг за другом");
                             return false;
@@ -81,7 +82,7 @@ namespace ConsoleApp1
                     Console.Write($"Заменим {podformula} на I");
                     input = input.Replace(podformula, "I");
                     Console.Write("\tФормула: " + input + "\n");
-                    
+
                 }
                 //проверка на то что идти дальше некуда
                 exit = input == "I" || exit;
@@ -91,9 +92,11 @@ namespace ConsoleApp1
             return true;
         }
 
-        public void PrefixFormula()
+        public void ConvertToPrefix()
         {
+            var s = formula.Replace(" ", "").Split("");
 
         }
     }
 }
+
